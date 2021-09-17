@@ -32,7 +32,7 @@ import org.openmrs.module.spreadsheetimport.service.SpreadsheetImportService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class SpreadsheetImportTemplate {
-
+	
 	@Autowired
 	private SessionFactory sessionFactory;
 	
@@ -50,6 +50,7 @@ public class SpreadsheetImportTemplate {
 	boolean encounter;
 	
 	String targetForm;
+	
 	// Citigo addition ends
 	
 	Date created;
@@ -61,7 +62,7 @@ public class SpreadsheetImportTemplate {
 	User modifiedBy;
 	
 	private String test;
-
+	
 	private Map<UniqueImport, Set<SpreadsheetImportTemplateColumn>> rowDataTemp = null;
 	
 	Set<SpreadsheetImportTemplateColumn> columns = new TreeSet<SpreadsheetImportTemplateColumn>();
@@ -100,21 +101,21 @@ public class SpreadsheetImportTemplate {
 	public boolean isEncounter() {
 		return encounter;
 	}
-
+	
 	public void setEncounter(boolean encounter) {
 		this.encounter = encounter;
 	}
-
+	
 	public String getTargetForm() {
 		return targetForm;
 	}
-
+	
 	public void setTargetForm(String targetForm) {
 		this.targetForm = targetForm;
 	}
 	
 	// Citigo addition ends
-
+	
 	public Date getCreated() {
 		return created;
 	}
@@ -260,19 +261,19 @@ public class SpreadsheetImportTemplate {
 		
 		return result;
 	}
-
+	
 	public String getTest() {
 		return test;
 	}
-
+	
 	public void setTest(String test) {
 		this.test = test;
 	}
-
+	
 	public Map<UniqueImport, Set<SpreadsheetImportTemplateColumn>> getRowDataTemp() {
 		return rowDataTemp;
 	}
-
+	
 	public void setRowDataTemp(Map<UniqueImport, Set<SpreadsheetImportTemplateColumn>> rowDataTemp) {
 		this.rowDataTemp = rowDataTemp;
 	}

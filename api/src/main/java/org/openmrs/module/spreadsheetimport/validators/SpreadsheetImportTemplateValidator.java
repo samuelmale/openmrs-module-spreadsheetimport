@@ -29,14 +29,14 @@ public class SpreadsheetImportTemplateValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "description", "");
 		
 		SpreadsheetImportTemplate template = (SpreadsheetImportTemplate) obj;
-
+		
 		for (int i = 0; i < template.getColumns().size(); i++) {
-			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "columns["+i+"].name", "");
-			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "columns["+i+"].tableDotColumn", "");
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "columns[" + i + "].name", "");
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "columns[" + i + "].tableDotColumn", "");
 		}
-
-//		for (int i = 0; i < template.getPrespecifiedValues().size(); i++) {
-//			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "prespecifiedValues["+i+"].value", "");
-//		}	
+		
+		//		for (int i = 0; i < template.getPrespecifiedValues().size(); i++) {
+		//			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "prespecifiedValues["+i+"].value", "");
+		//		}	
 	}
 }

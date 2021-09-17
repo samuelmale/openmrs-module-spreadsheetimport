@@ -60,9 +60,10 @@ public class SpreadsheetImportDAOImpl implements SpreadsheetImportDAO {
 	}
 	
 	public String getPredfinedValueById(int id) {
-		SpreadsheetImportTemplatePrespecifiedValue spreadsheetImportTemplatePrespecifiedValue = (SpreadsheetImportTemplatePrespecifiedValue) sessionFactory.getCurrentSession().load(SpreadsheetImportTemplatePrespecifiedValue.class, id);
-		return spreadsheetImportTemplatePrespecifiedValue != null ? spreadsheetImportTemplatePrespecifiedValue.getValue() : "";
+		SpreadsheetImportTemplatePrespecifiedValue spreadsheetImportTemplatePrespecifiedValue = (SpreadsheetImportTemplatePrespecifiedValue) sessionFactory
+		        .getCurrentSession().load(SpreadsheetImportTemplatePrespecifiedValue.class, id);
+		return spreadsheetImportTemplatePrespecifiedValue != null ? spreadsheetImportTemplatePrespecifiedValue.getValue()
+		        : "";
 	}
-	
 	
 }

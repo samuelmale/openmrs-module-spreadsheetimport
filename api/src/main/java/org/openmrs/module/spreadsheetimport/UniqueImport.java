@@ -93,6 +93,6 @@ public class UniqueImport implements Comparable {
 	}
 	
 	public String toString() {
-		return "tableName=" + tableName + ", datasetIdx=" + (datasetIdx==null ? "-1" : datasetIdx.toString());
+		return "tableName=" + tableName + ", datasetIdx=" + (datasetIdx == null ? "-1" : datasetIdx.toString());
 	}
 }

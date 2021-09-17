@@ -13,23 +13,22 @@
  */
 package org.openmrs.module.spreadsheetimport.db.hibernate;
 
-
 import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.openmrs.module.spreadsheetimport.SpreadsheetImportTemplate;
 
 public interface SpreadsheetImportDAO {
-
+	
 	public SessionFactory getSessionFactory();
 	
-    List<SpreadsheetImportTemplate> getAllTemplates();
-
-    SpreadsheetImportTemplate getTemplateById(Integer id);
-
-    SpreadsheetImportTemplate saveSpreadsheetImportTemplate(SpreadsheetImportTemplate template);
-
-    void deleteSpreadsheetImportTemplate(SpreadsheetImportTemplate template);
-    
-    public String getPredfinedValueById(int id);
+	List<SpreadsheetImportTemplate> getAllTemplates();
+	
+	SpreadsheetImportTemplate getTemplateById(Integer id);
+	
+	SpreadsheetImportTemplate saveSpreadsheetImportTemplate(SpreadsheetImportTemplate template);
+	
+	void deleteSpreadsheetImportTemplate(SpreadsheetImportTemplate template);
+	
+	public String getPredfinedValueById(int id);
 }

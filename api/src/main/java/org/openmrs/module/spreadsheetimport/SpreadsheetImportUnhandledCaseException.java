@@ -13,10 +13,9 @@
  */
 package org.openmrs.module.spreadsheetimport;
 
-
 /**
  *
  */
 public class SpreadsheetImportUnhandledCaseException extends Exception {
-
+	
 }

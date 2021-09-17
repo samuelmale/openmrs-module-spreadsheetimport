@@ -21,29 +21,30 @@ import java.sql.SQLSyntaxErrorException;
 public class SpreadsheetImportSQLSyntaxException extends SQLSyntaxErrorException {
 	
 	private static final long serialVersionUID = -6119791728147359567L;
-
+	
 	private String sqlStatement;
+	
 	private String sqlErrorMessage;
 	
 	public SpreadsheetImportSQLSyntaxException(String sqlStatement, String sqlErrorMessage) {
 		this.sqlStatement = sqlStatement;
 		this.sqlErrorMessage = sqlErrorMessage;
 	}
-
+	
 	public String getSqlStatement() {
 		return sqlStatement;
 	}
-
+	
 	public void setSqlStatement(String sqlStatement) {
 		this.sqlStatement = sqlStatement;
 	}
-
+	
 	public String getSqlErrorMessage() {
 		return sqlErrorMessage;
 	}
-
+	
 	public void setSqlErrorMessage(String sqlErrorMessage) {
 		this.sqlErrorMessage = sqlErrorMessage;
 	}
-		
+	
 }

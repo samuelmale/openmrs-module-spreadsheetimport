@@ -34,7 +34,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
+// import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -62,24 +62,24 @@ public class SpreadsheetImportUtil {
 		
 		List<String> tableNamesSortedByImportIdx = new ArrayList<String>();
 		
-//		// special treatment: when there's a reference to person_id, but 
-//		//  1) the current table is not encounter and 
-//		//  2) there's no column of table person to be added
-//		// then we should still add a person implicitly. This person record will use all default values
-//		boolean hasToAddPerson = false;
-//		for (UniqueImport key : mapUiToCs.keySet()) {
-//			String tableName = key.getTableName();			
-//			if (!("encounter".equals(tableName) || mapTnToUi.keySet().contains("person"))) {
-//				hasToAddPerson = true;
-//				break;
-//			}
-//		}
-//		if (hasToAddPerson) {
-//			UniqueImport ui = new UniqueImport("person", new Integer(-1));
-//			mapTnToUi.put("person", new TreeSet<UniqueImport>());
-//			mapUiToCs.put(ui, new TreeSet<SpreadsheetImportTemplateColumn>());
-//		}
-				
+		//		// special treatment: when there's a reference to person_id, but 
+		//		//  1) the current table is not encounter and 
+		//		//  2) there's no column of table person to be added
+		//		// then we should still add a person implicitly. This person record will use all default values
+		//		boolean hasToAddPerson = false;
+		//		for (UniqueImport key : mapUiToCs.keySet()) {
+		//			String tableName = key.getTableName();			
+		//			if (!("encounter".equals(tableName) || mapTnToUi.keySet().contains("person"))) {
+		//				hasToAddPerson = true;
+		//				break;
+		//			}
+		//		}
+		//		if (hasToAddPerson) {
+		//			UniqueImport ui = new UniqueImport("person", new Integer(-1));
+		//			mapTnToUi.put("person", new TreeSet<UniqueImport>());
+		//			mapUiToCs.put(ui, new TreeSet<SpreadsheetImportTemplateColumn>());
+		//		}
+		
 		// Find requirements
 		for (UniqueImport key : mapUiToCs.keySet()) {
 			String tableName = key.getTableName();
@@ -98,40 +98,40 @@ public class SpreadsheetImportUtil {
 			// provider_id is of type person, but the meaning is different. During import, reference to person is considered patient,
 			// but for provider_id of Encounter, it refers to a health practitioner
 			if ("encounter".equals(tableName)) {
-//				mapIkTnToCn.put("person", "provider_id"); 			// UPDATE: provider_id is no longer a foreign key for encounter
+				//				mapIkTnToCn.put("person", "provider_id"); 			// UPDATE: provider_id is no longer a foreign key for encounter
 				mapIkTnToCn.put("location", "location_id");
 				mapIkTnToCn.put("form", "form_id");
 				
-//				// if this is an encounter-based import, then pre-specify the form_id for the encounter
-//				// 1. search for encounter column
-//				SpreadsheetImportTemplateColumn encounterColumn = mapUiToCs.get(key).iterator().next();
-//				// 2. prespecify form 				
-//				SpreadsheetImportTemplatePrespecifiedValue v = new SpreadsheetImportTemplatePrespecifiedValue();
-//				v.setTemplate(template);
-//				v.setTableDotColumn("form.form_id");
-//				v.setValue(template.getTargetForm());
-//				SpreadsheetImportTemplateColumnPrespecifiedValue cpv = new SpreadsheetImportTemplateColumnPrespecifiedValue();
-//				cpv.setColumn(encounterColumn);
-//				cpv.setPrespecifiedValue(v);
-//				prespecifiedValues.add(v);
+				//				// if this is an encounter-based import, then pre-specify the form_id for the encounter
+				//				// 1. search for encounter column
+				//				SpreadsheetImportTemplateColumn encounterColumn = mapUiToCs.get(key).iterator().next();
+				//				// 2. prespecify form 				
+				//				SpreadsheetImportTemplatePrespecifiedValue v = new SpreadsheetImportTemplatePrespecifiedValue();
+				//				v.setTemplate(template);
+				//				v.setTableDotColumn("form.form_id");
+				//				v.setValue(template.getTargetForm());
+				//				SpreadsheetImportTemplateColumnPrespecifiedValue cpv = new SpreadsheetImportTemplateColumnPrespecifiedValue();
+				//				cpv.setColumn(encounterColumn);
+				//				cpv.setPrespecifiedValue(v);
+				//				prespecifiedValues.add(v);
 			}
 			
 			// Ignore users tableName 
 			mapIkTnToCn.remove("users");
 			
 			for (String necessaryTableName : mapIkTnToCn.keySet()) {
-
+				
 				String necessaryColumnName = mapIkTnToCn.get(necessaryTableName);
-
+				
 				// TODO: I believe patient and person are only tables with this relationship, if not, then this
 				// needs to be generalized
-				if (necessaryTableName.equals("patient") &&
-					!mapTnToUi.containsKey("patient") &&
-					mapTnToUi.containsKey("person")) {
+				if (necessaryTableName.equals("patient") && !mapTnToUi.containsKey("patient")
+				        && mapTnToUi.containsKey("person")) {
 					necessaryTableName = "person";
 				}
 				
-				if (mapTnToUi.containsKey(necessaryTableName) && !("encounter".equals(tableName) && ("provider_id".equals(necessaryColumnName)))) {
+				if (mapTnToUi.containsKey(necessaryTableName)
+				        && !("encounter".equals(tableName) && ("provider_id".equals(necessaryColumnName)))) {
 					
 					// Not already imported? Add
 					if (!tableNamesSortedByImportIdx.contains(necessaryTableName)) {
@@ -144,7 +144,8 @@ public class SpreadsheetImportUtil {
 					Set<SpreadsheetImportTemplateColumn> columnsImportFirst = new TreeSet<SpreadsheetImportTemplateColumn>();
 					for (UniqueImport uniqueImport : mapTnToUi.get(necessaryTableName)) {
 						// TODO: hacky cast
-						columnsImportFirst.add(((TreeSet<SpreadsheetImportTemplateColumn>)mapUiToCs.get(uniqueImport)).first());
+						columnsImportFirst.add(((TreeSet<SpreadsheetImportTemplateColumn>) mapUiToCs.get(uniqueImport))
+						        .first());
 					}
 					for (SpreadsheetImportTemplateColumn columnImportNext : mapUiToCs.get(key)) {
 						for (SpreadsheetImportTemplateColumn columnImportFirst : columnsImportFirst) {
@@ -167,10 +168,9 @@ public class SpreadsheetImportUtil {
 						cpv.setColumn(column);
 						cpv.setPrespecifiedValue(v);
 						
+						//						System.out.println("SpreadsheetImportUtils: " + v.getTableDotColumn() + " ==> " + v.getValue());
 						
-//						System.out.println("SpreadsheetImportUtils: " + v.getTableDotColumn() + " ==> " + v.getValue());
-						
-						cpv.setColumnName(necessaryColumnName);						
+						cpv.setColumnName(necessaryColumnName);
 						v.getColumnPrespecifiedValues().add(cpv);
 					}
 					prespecifiedValues.add(v);
@@ -214,8 +214,8 @@ public class SpreadsheetImportUtil {
 	}
 	
 	public static File importTemplate(SpreadsheetImportTemplate template, MultipartFile file, String sheetName,
-	                                     List<String> messages, boolean rollbackTransaction) throws Exception {
-
+	        List<String> messages, boolean rollbackTransaction) throws Exception {
+		
 		if (file.isEmpty()) {
 			messages.add("file must not be empty");
 			return null;
@@ -275,7 +275,7 @@ public class SpreadsheetImportUtil {
 				for (UniqueImport uniqueImport : rowData.keySet()) {
 					Set<SpreadsheetImportTemplateColumn> columnSet = rowData.get(uniqueImport);
 					for (SpreadsheetImportTemplateColumn column : columnSet) {
-												
+						
 						int idx = columnNames.indexOf(column.getName());
 						Cell cell = row.getCell(idx);
 						
@@ -320,21 +320,20 @@ public class SpreadsheetImportUtil {
 					Set<SpreadsheetImportTemplateColumn> columnSet = rowData.get(uniqueImport);
 					boolean isFirst = true;
 					for (SpreadsheetImportTemplateColumn column : columnSet) {
-
+						
 						if (isFirst) {
 							// Should be same for all columns in unique import
-//							System.out.println("SpreadsheetImportUtil.importTemplate: column.getColumnPrespecifiedValues(): " + column.getColumnPrespecifiedValues().size());
+							//							System.out.println("SpreadsheetImportUtil.importTemplate: column.getColumnPrespecifiedValues(): " + column.getColumnPrespecifiedValues().size());
 							if (column.getColumnPrespecifiedValues().size() > 0) {
-								Set<SpreadsheetImportTemplateColumnPrespecifiedValue> columnPrespecifiedValueSet = column.getColumnPrespecifiedValues();
+								Set<SpreadsheetImportTemplateColumnPrespecifiedValue> columnPrespecifiedValueSet = column
+								        .getColumnPrespecifiedValues();
 								for (SpreadsheetImportTemplateColumnPrespecifiedValue columnPrespecifiedValue : columnPrespecifiedValueSet) {
-//									System.out.println(columnPrespecifiedValue.getPrespecifiedValue().getValue());
+									//									System.out.println(columnPrespecifiedValue.getPrespecifiedValue().getValue());
 								}
 							}
 						}
 					}
 				}
-				
-				
 				
 				if (rowHasData) {
 					Exception exception = null;
@@ -345,26 +344,32 @@ public class SpreadsheetImportUtil {
 							for (UniqueImport uniqueImport : rowData.keySet()) {
 								Set<SpreadsheetImportTemplateColumn> columnSet = rowData.get(uniqueImport);
 								for (SpreadsheetImportTemplateColumn column : columnSet) {
-									if ("encounter".equals(column.getTableName())) {						
+									if ("encounter".equals(column.getTableName())) {
 										int idx = columnNames.indexOf(column.getName());
 										Cell cell = row.getCell(idx);
-										if (cell == null)											
+										if (cell == null)
 											cell = row.createCell(idx);
 										cell.setCellValue(encounterId);
 									}
 								}
 							}
 						}
-					} catch (SpreadsheetImportTemplateValidationException e) {
+					}
+					catch (SpreadsheetImportTemplateValidationException e) {
 						messages.add("Validation failed: " + e.getMessage());
 						return null;
-					} catch (SpreadsheetImportDuplicateValueException e) {
-						messages.add("found duplicate value for column " + e.getColumn().getName() + " with value " + e.getColumn().getValue());
+					}
+					catch (SpreadsheetImportDuplicateValueException e) {
+						messages.add("found duplicate value for column " + e.getColumn().getName() + " with value "
+						        + e.getColumn().getValue());
 						return null;
-					} catch (SpreadsheetImportSQLSyntaxException e) {
-						messages.add("SQL syntax error: \"" + e.getSqlErrorMessage() + "\".<br/>Attempted SQL Statement: \"" + e.getSqlStatement() + "\"");
+					}
+					catch (SpreadsheetImportSQLSyntaxException e) {
+						messages.add("SQL syntax error: \"" + e.getSqlErrorMessage() + "\".<br/>Attempted SQL Statement: \""
+						        + e.getSqlStatement() + "\"");
 						return null;
-					} catch (Exception e) {
+					}
+					catch (Exception e) {
 						exception = e;
 					}
 					if (exception != null) {

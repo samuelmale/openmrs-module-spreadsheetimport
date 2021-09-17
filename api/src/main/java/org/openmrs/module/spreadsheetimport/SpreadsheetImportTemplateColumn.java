@@ -176,6 +176,9 @@ public class SpreadsheetImportTemplateColumn implements Comparable {
 	}
 	
 	public String toString() {
-		return "name=" + name + ", tableDotColumn=" + tableDotColumn + ", datasetIdx=" + (datasetIdx==null ? "-1" : datasetIdx.toString()) + ", importIdx=" + (importIdx==null ? "-1" : importIdx.toString()) + ", disallowDuplicate=" + (disallowDuplicateValue==null ? "false" : disallowDuplicateValue.toString()); 
+		return "name=" + name + ", tableDotColumn=" + tableDotColumn + ", datasetIdx="
+		        + (datasetIdx == null ? "-1" : datasetIdx.toString()) + ", importIdx="
+		        + (importIdx == null ? "-1" : importIdx.toString()) + ", disallowDuplicate="
+		        + (disallowDuplicateValue == null ? "false" : disallowDuplicateValue.toString());
 	}
 }

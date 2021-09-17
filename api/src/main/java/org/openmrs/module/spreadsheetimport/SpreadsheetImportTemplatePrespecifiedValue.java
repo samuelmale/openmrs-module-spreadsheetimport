@@ -75,7 +75,7 @@ public class SpreadsheetImportTemplatePrespecifiedValue implements Comparable {
 	public void setColumnPrespecifiedValues(Set<SpreadsheetImportTemplateColumnPrespecifiedValue> columnPrespecifiedValues) {
 		this.columnPrespecifiedValues = columnPrespecifiedValues;
 	}
-
+	
 	public int compareTo(Object arg0) {
 		SpreadsheetImportTemplatePrespecifiedValue that = (SpreadsheetImportTemplatePrespecifiedValue) arg0;
 		if (getId() == null) {
@@ -94,7 +94,7 @@ public class SpreadsheetImportTemplatePrespecifiedValue implements Comparable {
 		}
 		return result;
 	}
-
+	
 	/**
 	 * Pretty tableName associated with this pre-specified value
 	 */
@@ -103,7 +103,7 @@ public class SpreadsheetImportTemplatePrespecifiedValue implements Comparable {
 		String table = tableDotColumn.substring(0, idx);
 		return DatabaseBackend.makePrettyName(table);
 	}
-
+	
 	/**
 	 * Map of name to idValue for tableName
 	 * 

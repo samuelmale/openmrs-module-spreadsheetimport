@@ -26,9 +26,9 @@ public class SpreadsheetImportTemplateColumnPrespecifiedValue implements Compara
 	SpreadsheetImportTemplatePrespecifiedValue prespecifiedValue;
 	
 	String columnName;
-
+	
 	public SpreadsheetImportTemplateColumnPrespecifiedValue() {
-	}	
+	}
 	
 	public Integer getId() {
 		return id;
@@ -61,7 +61,7 @@ public class SpreadsheetImportTemplateColumnPrespecifiedValue implements Compara
 	public void setColumnName(String columnName) {
 		this.columnName = columnName;
 	}
-
+	
 	public int compareTo(Object arg0) {
 		SpreadsheetImportTemplateColumnPrespecifiedValue that = (SpreadsheetImportTemplateColumnPrespecifiedValue) arg0;
 		if (getId() == null) {
@@ -79,5 +79,5 @@ public class SpreadsheetImportTemplateColumnPrespecifiedValue implements Compara
 			s += ", prespecifiedvalue={" + prespecifiedValue.toString() + "}";
 		return s;
 	}
-
+	
 }

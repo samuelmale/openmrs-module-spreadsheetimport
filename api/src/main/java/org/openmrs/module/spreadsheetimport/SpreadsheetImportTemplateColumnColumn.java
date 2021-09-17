@@ -74,11 +74,11 @@ public class SpreadsheetImportTemplateColumnColumn implements Comparable {
 	}
 	
 	public String toString() {
-		String s = "columnName="+columnName;
+		String s = "columnName=" + columnName;
 		if (columnImportFirst != null)
 			s += ", columnImportFirst={" + columnImportFirst.toString() + "}";
 		if (columnImportNext != null)
 			s += ", columnImportNext={" + columnImportNext.toString() + "}";
-		return s;		
+		return s;
 	}
 }
